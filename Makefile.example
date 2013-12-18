@@ -1,7 +1,7 @@
 TEX = pdflatex  -halt-on-error #-interaction=batchmode
 BIB= bibtex
 FIGURES = 
-NAME = repaper
+NAME = NAME
 .PHONY:all clean remote-start remote-stop mainbuild
 
 all: remote-stop
