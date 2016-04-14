@@ -1,25 +1,7 @@
-TEX = pdflatex  -halt-on-error #-interaction=batchmode
+TEX = pdflatex  -halt-on-error
 BIB= bibtex
-FIGURES = 
-NAME = NAME
-.PHONY:all clean remote-start remote-stop mainbuild
-
-all: remote-stop
-
-
-remote-start:
-	echo "Starting Build"
-	#put any prebuild set-up here
-
-
-remote-stop:mainbuild
-	echo "Finished Build"
-	#put any post-build tear down steps here
-
-
-mainbuild:remote-start
-	-$(MAKE) -k -s --no-print-directory $(NAME).pdf 
-
+FIGURES = #if you have figure files you would like to rebuild on changes to, put them here
+NAME = NAME #the prefix to your document files, e.g. to produce a document called thesis.pdf, use thesis
 
 $(NAME).pdf:$(NAME).out.tex $(FIGURES) $(NAME).out.bbl
 	@$(TEX) $< 
@@ -39,4 +21,5 @@ $(NAME).out.tex: $(NAME).tex
 	@$(TEX) $<
 	./betterbib.py $(NAME).bib $< $(NAME).aux
 
-    
+clean:
+	rm -rf *.out *.out.tex *.aux
